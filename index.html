@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>MugzySlugs | The Official Slug Pit | Twitch Streamer, Veteran & Reseller</title>
+    <meta name="description" content="Welcome to The Slug Pit! Official home of MugzySlugs (Kevin / Prince_Muggzy)—Twitch Affiliate, US Military Veteran, Power eBay Seller, Dropshipping & E-Commerce Expert, Albion Online streamer, and dark-trap producer.">
+    <meta name="keywords" content="MugzySlugs, Kevin, Twitch, streamer, eBay seller, ecommerce expert, dropshipping, marketplace arbitrage, Albion Online, Dead by Daylight, US Veteran, Dark Trap, Emo Rap, Slug Pit, Slug Army">
+    
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:title" content="MugzySlugs | The Official Slug Pit">
+    <meta property="og:description" content="Watch live on twitch.tv/mugzyslugs - Variety streamer, military veteran, eBay/e-commerce expert, and dark-trap producer. Enter the Slug Pit!">
+    <meta property="og:url" content="https://www.twitch.tv/mugzyslugs">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#39ff14">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Full-Screen Interactive Slime Trail Canvas -->
+    <canvas id="trail-canvas" aria-hidden="true"></canvas>
+
+    <!-- Animated Slug Companion that follows mouse / touch -->
+    <div id="slug-companion" class="slug-companion" aria-label="Interactive Slug Pet">
+        <div class="slug-speech-bubble" id="slug-bubble">SLIME PIT! 🐌</div>
+        <div class="slug-body-wrap">
+            <svg class="slug-svg" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="slugSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#55ff22"/>
+                        <stop offset="45%" stop-color="#28d40a"/>
+                        <stop offset="100%" stop-color="#147504"/>
+                    </linearGradient>
+                    <linearGradient id="slugSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+                        <stop offset="100%" stop-color="#55ff22" stop-opacity="0"/>
+                    </linearGradient>
+                    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#bf55ec"/>
+                        <stop offset="100%" stop-color="#73139c"/>
+                    </radialGradient>
+                    <filter id="slugGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#39ff14" flood-opacity="0.6"/>
+                    </filter>
+                </defs>
+                <!-- Tail slime puddle -->
+                <ellipse cx="20" cy="56" rx="16" ry="6" fill="#39ff14" opacity="0.6" filter="blur(2px)"/>
+                <!-- Slug Main Body -->
+                <path class="slug-path-body" d="M12,56 C6,55 5,46 14,42 C28,36 45,34 68,36 C86,37 104,40 108,48 C112,54 105,58 92,58 C65,59 34,59 12,56 Z" fill="url(#slugSkin)" filter="url(#slugGlow)"/>
+                <!-- Body Highlights (Glistening slime shine) -->
+                <path d="M25,44 C42,39 70,39 96,44 C85,41 50,40 28,45 Z" fill="url(#slugSheen)"/>
+                <circle cx="45" cy="46" r="3" fill="#ffffff" opacity="0.5"/>
+                <circle cx="62" cy="45" r="2.2" fill="#ffffff" opacity="0.4"/>
+                <circle cx="80" cy="47" r="2.8" fill="#ffffff" opacity="0.5"/>
+                <!-- Eyestalk Left -->
+                <path class="slug-eyestalk eyestalk-left" d="M90,44 Q96,24 94,14" stroke="#28d40a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                <!-- Eyestalk Right -->
+                <path class="slug-eyestalk eyestalk-right" d="M99,46 Q108,27 108,17" stroke="#28d40a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                <!-- Eyeball Left -->
+                <circle class="slug-eyeball" cx="94" cy="13" r="6" fill="#ffffff"/>
+                <circle class="slug-pupil pupil-left" cx="95" cy="13" r="3.2" fill="#0d1117"/>
+                <circle cx="93" cy="11.5" r="1.3" fill="#ffffff"/>
+                <!-- Eyeball Right -->
+                <circle class="slug-eyeball" cx="108" cy="16" r="6" fill="#ffffff"/>
+                <circle class="slug-pupil pupil-right" cx="109" cy="16" r="3.2" fill="#0d1117"/>
+                <circle cx="107" cy="14.5" r="1.3" fill="#ffffff"/>
+                <!-- Cute mouth / cheek -->
+                <path d="M104,50 Q106,53 102,54" stroke="#0d4703" stroke-width="2" stroke-linecap="round" fill="none"/>
+                <ellipse cx="98" cy="50" rx="3" ry="1.5" fill="#ff77a8" opacity="0.6"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Live Stream Ticker & Top Alert Banner -->
+    <div class="top-stream-banner">
+        <div class="banner-inner">
+            <span class="live-indicator"><span class="live-dot-pulse"></span> LIVE RADAR</span>
+            <span class="banner-text">Mugzy is live streaming gaming, market flips, and dark trap beats in the Slug Pit!</span>
+            <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="banner-cta">
+                <i class="fa-brands fa-twitch"></i> WATCH ON TWITCH.TV/MUGZYSLUGS &rarr;
+            </a>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="#home" class="logo-link">
+                <div class="brand-slug-icon"><i class="fa-solid fa-staff-snake"></i></div>
+                <div class="logo-text">
+                    <span class="neon-text-green">Mugzy</span><span class="neon-text-purple">Slugs</span>
+                    <span class="logo-sub">TWITCH.TV/MUGZYSLUGS</span>
+                </div>
+            </a>
+
+            <nav class="main-nav" id="main-nav">
+                <a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#twitch-live" class="nav-link highlight-twitch"><i class="fa-brands fa-twitch"></i> Watch Live</a>
+                <a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> About Kevin</a>
+                <a href="#ecommerce" class="nav-link"><i class="fa-solid fa-cart-shopping"></i> E-Commerce</a>
+                <a href="#games" class="nav-link"><i class="fa-solid fa-gamepad"></i> Games</a>
+                <a href="#music" class="nav-link"><i class="fa-solid fa-compact-disc"></i> Music</a>
+                <a href="#soundboard" class="nav-link"><i class="fa-solid fa-volume-high"></i> Soundboard</a>
+                <a href="#schedule" class="nav-link"><i class="fa-regular fa-calendar-days"></i> Schedule</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Companion Quick Controls -->
+                <button id="toggle-companion-btn" class="icon-toggle-btn" title="Toggle Slug Pet Companion">
+                    <span class="btn-emoji">🐌</span> <span class="btn-label">Slug: ON</span>
+                </button>
+                <button id="feed-slug-btn" class="feed-btn" title="Feed lettuce to your slug!">
+                    🥬 Feed Slug
+                </button>
+                <!-- Direct Twitch Link -->
+                <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="btn btn-twitch-header">
+                    <i class="fa-brands fa-twitch"></i>
+                    <span>FOLLOW</span>
+                </a>
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-backdrop-glow green-orb"></div>
+            <div class="hero-backdrop-glow purple-orb"></div>
+            
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="badge-cluster">
+                        <span class="pill-badge twitch-pill"><i class="fa-brands fa-twitch"></i> Official Twitch Channel</span>
+                        <span class="pill-badge vet-pill"><i class="fa-solid fa-shield-halved"></i> US Military Veteran</span>
+                        <span class="pill-badge ebay-pill"><i class="fa-solid fa-store"></i> eBay &amp; E-Commerce Pro</span>
+                        <span class="pill-badge 420-pill"><i class="fa-solid fa-cannabis"></i> Cozy &amp; 420 Friendly</span>
+                    </div>
+
+                    <h1 class="hero-headline">
+                        ENTER THE <br>
+                        <span class="slime-title-glitch" data-text="SLUG PIT">SLUG PIT</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Streamer, military veteran, e-commerce entrepreneur, and dark-trap producer. Join <strong>Kevin (MugzySlugs)</strong> for high-stakes <em>Albion Online</em> economy PvP, heart-racing <em>Dead by Daylight</em> survivor loops, online marketplace hustle, and deep community vibes.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-twitch-glow">
+                            <i class="fa-brands fa-twitch"></i>
+                            <span>JOIN LIVE ON TWITCH</span>
+                            <span class="cta-arrow">&rarr;</span>
+                        </a>
+                        <a href="#twitch-live" class="btn btn-secondary">
+                            <i class="fa-solid fa-tv"></i> Live Stage &amp; Chat
+                        </a>
+                        <a href="#ecommerce" class="btn btn-outline">
+                            <i class="fa-solid fa-chart-line"></i> Reselling &amp; Flips
+                        </a>
+                    </div>
+
+                    <!-- Stream Stats / Channel Metrics -->
+                    <div class="channel-highlights">
+                        <div class="stat-box">
+                            <span class="stat-number">twitch.tv/</span>
+                            <span class="stat-label">mugzyslugs</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Veteran Owned</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number">PRO</span>
+                            <span class="stat-label">eBay &amp; Dropshipping</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-number" id="slime-counter-val">0</span>
+                            <span class="stat-label">Slime Splatters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Showcase -->
+                <div class="hero-showcase">
+                    <div class="stream-card-preview">
+                        <div class="card-glass-header">
+                            <div class="channel-avatar">
+                                <div class="avatar-ring">
+                                    <i class="fa-solid fa-shield-dog avatar-icon"></i>
+                                </div>
+                                <span class="status-dot-live"></span>
+                            </div>
+                            <div class="channel-meta">
+                                <h3>MugzySlugs (Kevin)</h3>
+                                <p><i class="fa-brands fa-twitch"></i> twitch.tv/mugzyslugs</p>
+                            </div>
+                            <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="btn-sm-follow">
+                                <i class="fa-solid fa-heart"></i> Follow
+                            </a>
+                        </div>
+                        
+                        <div class="preview-thumbnail">
+                            <div class="thumbnail-overlay">
+                                <div class="live-tag"><span class="blink-dot"></span> LIVE ON TWITCH</div>
+                                <div class="game-tag"><i class="fa-solid fa-gamepad"></i> Gaming &amp; Resale Talk</div>
+                            </div>
+                            <div class="thumbnail-art">
+                                <div class="slug-emperor-art">
+                                    <div class="art-slug-body"></div>
+                                    <div class="art-slug-glow"></div>
+                                </div>
+                                <div class="art-text-overlay">
+                                    <h4>THE SLUG PIT</h4>
+                                    <p>Click below to jump directly into chat</p>
+                                </div>
+                            </div>
+                            <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="thumbnail-play-btn" title="Open Twitch Stream">
+                                <i class="fa-solid fa-play"></i>
+                            </a>
+                        </div>
+
+                        <div class="card-footer-action">
+                            <div class="footer-info">
+                                <span class="slug-army-tag"><i class="fa-solid fa-users"></i> The Slug Army</span>
+                                <span class="vibe-tag"><i class="fa-solid fa-tags"></i> Reseller &amp; Gamer</span>
+                            </div>
+                            <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="btn-jump-in">
+                                Watch on Twitch &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mini interactive hint -->
+                    <div class="companion-hint">
+                        <span class="hint-icon">💡</span>
+                        <span>Drag your mouse or touch the screen to lead your slug companion leaving a neon slime trail!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Twitch Live Command Center & Interactive Stage -->
+        <section id="twitch-live" class="twitch-stage-section">
+            <div class="section-header">
+                <div class="section-tag"><i class="fa-brands fa-twitch"></i> TWITCH COMMAND CENTER</div>
+                <h2 class="section-title">THE LIVE <span class="neon-text-purple">BROADCAST</span></h2>
+                <p class="section-subtitle">Catch the broadcast live at <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="twitch-inline-link">twitch.tv/mugzyslugs</a> or interact with the Slug Pit simulator below!</p>
+                <div class="accent-line bg-purple"></div>
+            </div>
+
+            <div class="twitch-theater-layout">
+                <!-- Stream Player Box -->
+                <div class="theater-player-box">
+                    <div class="player-topbar">
+                        <div class="stream-info-left">
+                            <span class="live-pill-red"><span class="pulse-red"></span> LIVE</span>
+                            <span class="stream-title-text" id="stream-title-display">MugzySlugs | Albion Online Black Zone Grind &amp; Resale Flips !discord !music</span>
+                        </div>
+                        <div class="stream-actions-right">
+                            <button class="embed-mode-btn" id="toggle-twitch-embed-btn" title="Toggle Live Twitch Player">
+                                <i class="fa-solid fa-satellite-dish"></i> Load Official Twitch Embed
+                            </button>
+                            <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="popout-btn" title="Open on Twitch">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Twitch
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Embed container (default: rich animated stage with instant play) -->
+                    <div class="player-viewport" id="player-viewport">
+                        <div class="stage-placeholder" id="stage-placeholder">
+                            <div class="stage-graphics">
+                                <div class="stage-glow-ring"></div>
+                                <i class="fa-brands fa-twitch stage-twitch-icon"></i>
+                                <h3>twitch.tv/mugzyslugs</h3>
+                                <p>High adrenaline gameplay, Albion player-driven markets, e-commerce dropshipping insights, and veteran brotherhood.</p>
+                                <div class="stage-button-row">
+                                    <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-twitch-main">
+                                        <i class="fa-brands fa-twitch"></i> GO TO LIVE STREAM
+                                    </a>
+                                    <button class="btn btn-secondary" id="load-embed-now-btn">
+                                        <i class="fa-solid fa-play"></i> Embed Player Here
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Container where Twitch iframe injects when toggled -->
+                        <div id="twitch-embed-container" class="twitch-embed-container" style="display:none;"></div>
+                    </div>
+
+                    <!-- Player Controller Bar -->
+                    <div class="player-bottom-hud">
+                        <div class="channel-identity">
+                            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=mugzyslugs&backgroundColor=39ff14" alt="MugzySlugs Avatar" class="hud-avatar">
+                            <div class="hud-details">
+                                <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="hud-channel-name">MugzySlugs <i class="fa-solid fa-circle-check verify-badge"></i></a>
+                                <span class="hud-category"><i class="fa-solid fa-gamepad"></i> Albion Online / Dead by Daylight / Resale Hustle</span>
+                            </div>
+                        </div>
+                        <div class="hud-actions">
+                            <button class="hud-btn hype-btn" id="hype-train-btn">
+                                <i class="fa-solid fa-fire"></i> HYPE TRAIN!
+                            </button>
+                            <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="hud-btn follow-twitch-btn">
+                                <i class="fa-brands fa-twitch"></i> Follow Channel
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Twitch Chat Simulator -->
+                <div class="theater-chat-box">
+                    <div class="chat-header-bar">
+                        <div class="chat-title-group">
+                            <span class="chat-title"><i class="fa-solid fa-comments"></i> STREAM CHAT</span>
+                            <span class="chat-room">The Slug Pit</span>
+                        </div>
+                        <div class="chat-controls">
+                            <button id="clear-chat-btn" class="chat-tool-btn" title="Clear Chat"><i class="fa-solid fa-trash-can"></i></button>
+                            <a href="https://www.twitch.tv/mugzyslugs/chat" target="_blank" rel="noopener noreferrer" class="chat-tool-btn" title="Open Real Twitch Chat"><i class="fa-solid fa-external-link"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="chat-message-stream" id="chat-messages">
+                        <!-- Simulated Chat messages stream here -->
+                    </div>
+
+                    <!-- Quick Emote / Command Pills -->
+                    <div class="quick-chat-pills">
+                        <button class="pill-chip" data-msg="Slug Army rise up! 🐌💚">🐌 Slug Army</button>
+                        <button class="pill-chip" data-msg="!discord">!discord</button>
+                        <button class="pill-chip" data-msg="!resell">!resell</button>
+                        <button class="pill-chip" data-msg="!music">!music</button>
+                        <button class="pill-chip" data-msg="HYPE HYPE HYPE 🔥">🔥 HYPE</button>
+                        <button class="pill-chip" data-msg="GGs Mugzy that flip was huge!">GGs!</button>
+                    </div>
+
+                    <!-- Chat Input Area -->
+                    <form class="chat-input-form" id="chat-form">
+                        <input type="text" id="chat-user-input" placeholder="Send a message to the Slug Pit..." maxlength="120" autocomplete="off">
+                        <button type="submit" id="chat-submit-btn" aria-label="Send message">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Kevin (MugzySlugs): Reseller, Veteran, Streamer, Music Producer -->
+        <section id="about" class="about-section">
+            <div class="section-header">
+                <div class="section-tag"><i class="fa-solid fa-user-astronaut"></i> THE MAN BEHIND THE SLUG</div>
+                <h2 class="section-title">WHO IS <span class="neon-text-green">KEVIN (MUGZYSLUGS)?</span></h2>
+                <div class="accent-line"></div>
+            </div>
+
+            <!-- The Running Slug Joke Lore Box -->
+            <div class="slug-lore-banner">
+                <div class="lore-icon">🐌</div>
+                <div class="lore-content">
+                    <h4>The Truth About the Slug Name</h4>
+                    <p>
+                        <em>"MugzySlugs just happens to be Kevin’s name. The slug angle is a running joke!"</em> Born from late-night banter between Kevin and his resale partner Matt while calculating margins and inspecting wholesale inventory lots, the slug motif quickly took on a life of its own. Today, the <strong>Slug Army</strong> represents relentless forward movement, unshakeable resilience, and maximum chill.
+                    </p>
+                </div>
+            </div>
+
+            <div class="niche-trio-grid four-cards">
+                <!-- E-Commerce & Resale Master -->
+                <div class="niche-card ebay-card">
+                    <div class="card-glow-bg"></div>
+                    <div class="card-icon-bubble">
+                        <i class="fa-solid fa-cart-flatbed"></i>
+                    </div>
+                    <h3>E-Commerce &amp; eBay Pro</h3>
+                    <div class="card-pill">Marketplace Master</div>
+                    <p>
+                        A seasoned eBay seller and cross-marketplace reseller. Kevin specializes in dropshipping, product arbitrage, bulk lot valuation, manifest auditing, and maximizing true net margins across multiple platforms.
+                    </p>
+                    <ul class="niche-highlights">
+                        <li><i class="fa-solid fa-check"></i> High-volume eBay seller &amp; dropshipper</li>
+                        <li><i class="fa-solid fa-check"></i> Multi-marketplace sourcing &amp; arbitrage</li>
+                        <li><i class="fa-solid fa-check"></i> True margin &amp; freight calculation</li>
+                    </ul>
+                </div>
+
+                <!-- Military Veteran Card -->
+                <div class="niche-card vet-card">
+                    <div class="card-glow-bg"></div>
+                    <div class="card-icon-bubble">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                    <h3>US Military Veteran</h3>
+                    <div class="card-pill">Brotherhood &amp; Honor</div>
+                    <p>
+                        A proud military veteran who brings discipline, strategic leadership, and camaraderie to the streaming space. The Slug Pit is dedicated to being a safe, zero-toxicity sanctuary for fellow veterans and gamers alike.
+                    </p>
+                    <ul class="niche-highlights">
+                        <li><i class="fa-solid fa-check"></i> Veteran-operated community</li>
+                        <li><i class="fa-solid fa-check"></i> Mental health &amp; decompression focused</li>
+                        <li><i class="fa-solid fa-check"></i> Zero-toxicity gaming zone</li>
+                    </ul>
+                </div>
+
+                <!-- Twitch Streamer Card -->
+                <div class="niche-card stream-card">
+                    <div class="card-glow-bg"></div>
+                    <div class="card-icon-bubble">
+                        <i class="fa-brands fa-twitch"></i>
+                    </div>
+                    <h3>Twitch Streamer</h3>
+                    <div class="card-pill">twitch.tv/mugzyslugs</div>
+                    <p>
+                        Specializing in intense, high-risk progression games and nail-biting survival multiplayer. Whether running Black Zone caravans in <em>Albion Online</em> or pulling off 360 loops in <em>Dead by Daylight</em>, every stream is high energy.
+                    </p>
+                    <ul class="niche-highlights">
+                        <li><i class="fa-solid fa-check"></i> Deep Albion Online economy &amp; PvP</li>
+                        <li><i class="fa-solid fa-check"></i> DBD survivor loops &amp; killer mindgames</li>
+                        <li><i class="fa-solid fa-check"></i> Interactive community lobbies</li>
+                    </ul>
+                </div>
+
+                <!-- Dark Trap / Music Producer Card -->
+                <div class="niche-card music-card">
+                    <div class="card-glow-bg"></div>
+                    <div class="card-icon-bubble">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <h3>Dark Trap Artist</h3>
+                    <div class="card-pill">Prince_Muggzy Music</div>
+                    <p>
+                        Independent music producer blending raw emotional vocals with hard-hitting 808s, melancholic guitar melodies, and dark-trap textures. Soundtrack music for late-night drives and overcoming life's battles.
+                    </p>
+                    <ul class="niche-highlights">
+                        <li><i class="fa-solid fa-check"></i> Original tracks: <em>NUMBIN</em>, <em>Social Suicide</em></li>
+                        <li><i class="fa-solid fa-check"></i> Collabs: <em>Moving Too Fast</em>, <em>Tokyo Drift</em></li>
+                        <li><i class="fa-solid fa-check"></i> Streaming on YouTube &amp; Twitch BGM</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- E-Commerce & Resale Deep Dive Section -->
+        <section id="ecommerce" class="ecommerce-section">
+            <div class="section-header">
+                <div class="section-tag"><i class="fa-solid fa-boxes-packing"></i> REAL WORLD COMMERCE &amp; ARBITRAGE</div>
+                <h2 class="section-title">THE E-COMMERCE <span class="neon-text-green">&amp; RESALE PLAYBOOK</span></h2>
+                <p class="section-subtitle">Beyond gaming and music, Kevin is an e-commerce expert who understands supply chains, marketplace algorithms, and product flipping from the ground up.</p>
+                <div class="accent-line"></div>
+            </div>
+
+            <div class="ecommerce-grid">
+                <div class="ecom-card">
+                    <div class="ecom-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3>Multi-Marketplace Selling</h3>
+                    <p>Dominating on eBay, Amazon, Facebook Marketplace, and regional platforms. Managing listings, dynamic pricing, and cross-channel inventory flow.</p>
+                    <span class="ecom-pill">eBay Power Seller</span>
+                </div>
+
+                <div class="ecom-card">
+                    <div class="ecom-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h3>Dropshipping &amp; Fulfillment</h3>
+                    <p>Engineering streamlined fulfillment pipelines, supplier coordination, order routing, and rapid turnaround for customer satisfaction.</p>
+                    <span class="ecom-pill">Logistics &amp; Automation</span>
+                </div>
+
+                <div class="ecom-card">
+                    <div class="ecom-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <h3>True-Margin Analysis</h3>
+                    <p>Factoring in acquisition costs, category fees, dimensional weight packaging, shipping variances, and target return to guarantee profitable flips.</p>
+                    <span class="ecom-pill">Data-Driven Sourcing</span>
+                </div>
+
+                <div class="ecom-card">
+                    <div class="ecom-icon"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
+                    <h3>Lot Auditing &amp; Vintage Sourcing</h3>
+                    <p>Scouting estate sales, wholesale liquidation pallets, manifest auditing, and identifying hidden gems like vintage electronics and collectible audio gear.</p>
+                    <span class="ecom-pill">Wholesale &amp; Thrift Flips</span>
+                </div>
+            </div>
+
+            <!-- Ecom & Albion Synergy Banner -->
+            <div class="synergy-banner">
+                <div class="synergy-badge"><i class="fa-solid fa-arrows-split-up-and-left"></i> THE REALITY &amp; GAMING SYNERGY</div>
+                <h3>Why Mugzy Dominates In Albion Online &amp; Reselling</h3>
+                <p>
+                    The same analytical mind that calculates eBay fees, carrier postage rates, and bulk lot margins in the real world drives Kevin's in-game mastery of <em>Albion Online’s</em> player-run economy. Whether hauling high-tier ore through hostile Outlands or flipping gear across city markets, commerce is in his blood.
+                </p>
+                <div class="synergy-cta">
+                    <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <i class="fa-brands fa-twitch"></i> Watch the Market Plays Live on Twitch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games & Content Hub -->
+        <section id="games" class="games-section">
+            <div class="section-header">
+                <div class="section-tag"><i class="fa-solid fa-crosshairs"></i> GAME ARSENAL</div>
+                <h2 class="section-title">THE SLUG ARMY <span class="neon-text-purple">BATTLEGROUNDS</span></h2>
+                <p class="section-subtitle">The primary games and titles featured live on <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer">twitch.tv/mugzyslugs</a></p>
+                <div class="accent-line bg-purple"></div>
+            </div>
+
+            <div class="games-grid">
+                <!-- Albion Online -->
+                <div class="game-item-card">
+                    <div class="game-badge">PRIMARY MMORPG</div>
+                    <div class="game-icon-banner">
+                        <i class="fa-solid fa-chess-knight"></i>
+                    </div>
+                    <div class="game-details">
+                        <h3>Albion Online</h3>
+                        <span class="game-genre">Sandbox MMORPG &amp; Full-Loot PvP</span>
+                        <p>
+                            Navigating the treacherous Outlands, conquering Black Zone dungeons, mastering high-tier crafting economies, and organizing guild warfare. In Albion, everything is player-driven and high stakes.
+                        </p>
+                        <div class="game-tags">
+                            <span>Black Zone Roaming</span>
+                            <span>Guild PvP</span>
+                            <span>Economy &amp; Crafting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dead by Daylight -->
+                <div class="game-item-card">
+                    <div class="game-badge">SURVIVAL HORROR</div>
+                    <div class="game-icon-banner">
+                        <i class="fa-solid fa-skull-crossbones"></i>
+                    </div>
+                    <div class="game-details">
+                        <h3>Dead by Daylight</h3>
+                        <span class="game-genre">Asymmetrical 4v1 Survival Horror</span>
+                        <p>
+                            Mastering survivor loop pathing, 360 jukes, flashlight saves, and cunning Killer mindgames. The Slug Pit regularly runs custom lobbies where viewers join the fog!
+                        </p>
+                        <div class="game-tags">
+                            <span>Looping God</span>
+                            <span>Viewer Custom Lobbies</span>
+                            <span>Killer Mindgames</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tactical / Variety & Future Titles -->
+                <div class="game-item-card">
+                    <div class="game-badge">TACTICAL / CO-OP</div>
+                    <div class="game-icon-banner">
+                        <i class="fa-solid fa-person-rifle"></i>
+                    </div>
+                    <div class="game-details">
+                        <h3>Tactical &amp; Survival Variety</h3>
+                        <span class="game-genre">Extraction Shooters &amp; Squad Co-op</span>
+                        <p>
+                            Exploring upcoming titles like <em>ARC Raiders</em>, squad extraction shooters, and cozy co-op adventures for late-night winding down with chat.
+                        </p>
+                        <div class="game-tags">
+                            <span>ARC Raiders</span>
+                            <span>Squad Tactics</span>
+                            <span>Late Night Co-op</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Music Hub Section with Real Web Audio Synthesizer -->
+        <section id="music" class="music-section">
+            <div class="section-header">
+                <div class="section-tag"><i class="fa-solid fa-headphones"></i> THE SOUND OF THE SLUG PIT</div>
+                <h2 class="section-title">ORIGINAL <span class="neon-text-green">DARK TRAP &amp; EMO RAP</span></h2>
+                <p class="section-subtitle">Real interactive Web Audio player—press play to hear the synthesized lo-fi dark trap beats crafted for Mugzy's discography!</p>
+                <div class="accent-line"></div>
+            </div>
+
+            <div class="music-player-grid">
+                <!-- Custom Web Audio Synth Player -->
+                <div class="synth-player-card">
+                    <div class="player-top-status">
+                        <span class="now-playing-pill"><i class="fa-solid fa-record-vinyl vinyl-spin"></i> SYNTH ENGINE ACTIVE</span>
+                        <div class="audio-spectrum" id="spectrum-bars">
+                            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <div class="track-hero-info">
+                        <div class="album-art-box">
+                            <i class="fa-solid fa-compact-disc disc-graphic" id="disc-icon"></i>
+                            <div class="art-slug-stamp">🐌</div>
+                        </div>
+                        <div class="track-text-meta">
+                            <h3 id="current-title">NUMBIN</h3>
+                            <p id="current-genre" class="track-genre-label">Lil Peep x MugzySlugs Type Dark Emo Trap</p>
+                            <span class="artist-credit"><i class="fa-solid fa-user-pen"></i> MugzySlugs (Prince_Muggzy)</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar & Timing -->
+                    <div class="timeline-container">
+                        <span class="time-label" id="curr-time">0:00</span>
+                        <div class="timeline-bg" id="progress-bg" role="slider" aria-label="Audio timeline scrubber" tabindex="0">
+                            <div class="timeline-fill" id="progress-fill"></div>
+                        </div>
+                        <span class="time-label" id="total-time">2:45</span>
+                    </div>
+
+                    <!-- Player Transport Controls -->
+                    <div class="transport-controls">
+                        <button class="transport-btn" id="prev-btn" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
+                        <button class="transport-btn play-main-btn" id="play-btn" title="Play or Pause Track">
+                            <i class="fa-solid fa-play" id="play-icon"></i>
+                        </button>
+                        <button class="transport-btn" id="next-btn" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
+                    </div>
+
+                    <!-- Volume & Audio FX Bar -->
+                    <div class="player-extras">
+                        <div class="volume-slider-wrap">
+                            <i class="fa-solid fa-volume-high volume-icon" id="vol-icon"></i>
+                            <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.7" aria-label="Volume Slider">
+                        </div>
+                        <span class="synth-badge"><i class="fa-solid fa-wave-square"></i> Real Web Audio Engine</span>
+                    </div>
+                </div>
+
+                <!-- Tracklist & Playlist -->
+                <div class="playlist-card">
+                    <div class="playlist-header">
+                        <h4><i class="fa-solid fa-list-ul"></i> FEATURED RELEASES</h4>
+                        <span class="track-count">5 Tracks</span>
+                    </div>
+
+                    <div class="tracks-list" id="tracks-list">
+                        <!-- Track 1 -->
+                        <div class="track-row active" data-index="0" data-title="NUMBIN" data-genre="Lil Peep x MugzySlugs Type Dark Emo Trap" data-duration="2:45" data-bpm="135" data-scale="minor">
+                            <div class="track-index-col"><span class="t-num">01</span><i class="fa-solid fa-wave-square t-wave"></i></div>
+                            <div class="track-meta-col">
+                                <h5>NUMBIN</h5>
+                                <span>Emo Rap / Melancholic Guitars &amp; 808s</span>
+                            </div>
+                            <span class="track-len">2:45</span>
+                        </div>
+
+                        <!-- Track 2 -->
+                        <div class="track-row" data-index="1" data-title="Social Suicide" data-genre="Melancholic Dark Trap Original" data-duration="3:12" data-bpm="140" data-scale="phrygian">
+                            <div class="track-index-col"><span class="t-num">02</span><i class="fa-solid fa-wave-square t-wave"></i></div>
+                            <div class="track-meta-col">
+                                <h5>Social Suicide</h5>
+                                <span>Dark Trap / Introspective Sub Bass</span>
+                            </div>
+                            <span class="track-len">3:12</span>
+                        </div>
+
+                        <!-- Track 3 -->
+                        <div class="track-row" data-index="2" data-title="Moving Too Fast" data-genre="Emotional Rap (feat. Mad_Ghost)" data-duration="2:58" data-bpm="128" data-scale="dorian">
+                            <div class="track-index-col"><span class="t-num">03</span><i class="fa-solid fa-wave-square t-wave"></i></div>
+                            <div class="track-meta-col">
+                                <h5>Moving Too Fast</h5>
+                                <span>Emotional Rap / Collab Chill</span>
+                            </div>
+                            <span class="track-len">2:58</span>
+                        </div>
+
+                        <!-- Track 4 -->
+                        <div class="track-row" data-index="3" data-title="Tokyo Drift" data-genre="Dark Trap Love Song" data-duration="3:30" data-bpm="145" data-scale="japanese">
+                            <div class="track-index-col"><span class="t-num">04</span><i class="fa-solid fa-wave-square t-wave"></i></div>
+                            <div class="track-meta-col">
+                                <h5>Tokyo Drift</h5>
+                                <span>Cyberpunk Dark Trap / Gliding Synths</span>
+                            </div>
+                            <span class="track-len">3:30</span>
+                        </div>
+
+                        <!-- Track 5 -->
+                        <div class="track-row" data-index="4" data-title="Silent Love" data-genre="Atmospheric Emo Lo-Fi" data-duration="2:36" data-bpm="120" data-scale="pentatonic">
+                            <div class="track-index-col"><span class="t-num">05</span><i class="fa-solid fa-wave-square t-wave"></i></div>
+                            <div class="track-meta-col">
+                                <h5>Silent Love</h5>
+                                <span>Atmospheric Lo-Fi / Late Night Reflections</span>
+                            </div>
+                            <span class="track-len">2:36</span>
+                        </div>
+                    </div>
+
+                    <div class="music-links-bar">
+                        <span>Find more tracks on:</span>
+                        <a href="https://www.youtube.com/@MugzySlugs" target="_blank" rel="noopener noreferrer" class="music-platform-link"><i class="fa-brands fa-youtube"></i> YouTube</a>
+                        <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="music-platform-link"><i class="fa-brands fa-twitch"></i> Twitch BGM</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Slug Soundboard & Slime Lab -->
+        <section id="soundboard" class="soundboard-section">
+            <div class="section-header">
+                <div class="section-tag"><i class="fa-solid fa-sliders"></i> INTERACTIVE SLUG PIT TOYS</div>
+                <h2 class="section-title">THE SLIME <span class="neon-text-purple">SOUNDBOARD &amp; LAB</span></h2>
+                <p class="section-subtitle">Click pads to trigger synthesized live sound effects and customize your slug companion!</p>
+                <div class="accent-line bg-purple"></div>
+            </div>
+
+            <div class="lab-grid">
+                <!-- Soundboard Pads -->
+                <div class="soundboard-card">
+                    <div class="card-inner-header">
+                        <h4><i class="fa-solid fa-drum"></i> Stream FX Soundboard</h4>
+                        <span class="note-pill">Web Audio Synthesized</span>
+                    </div>
+                    <div class="pads-grid">
+                        <button class="sound-pad pad-green" data-sound="squish">
+                            <span class="pad-emoji">🐌</span>
+                            <span class="pad-title">Slime Squish</span>
+                            <span class="pad-desc">Juicy pop</span>
+                        </button>
+                        <button class="sound-pad pad-purple" data-sound="alert">
+                            <span class="pad-emoji">🚨</span>
+                            <span class="pad-title">Twitch Alert</span>
+                            <span class="pad-desc">Chime</span>
+                        </button>
+                        <button class="sound-pad pad-cyan" data-sound="sub808">
+                            <span class="pad-emoji">🔊</span>
+                            <span class="pad-title">808 Sub Boom</span>
+                            <span class="pad-desc">Deep bass drop</span>
+                        </button>
+                        <button class="sound-pad pad-red" data-sound="battle">
+                            <span class="pad-emoji">⚔️</span>
+                            <span class="pad-title">Albion Horn</span>
+                            <span class="pad-desc">Battle charge</span>
+                        </button>
+                        <button class="sound-pad pad-yellow" data-sound="laser">
+                            <span class="pad-emoji">⚡</span>
+                            <span class="pad-title">Cyber Synth</span>
+                            <span class="pad-desc">Laser glide</span>
+                        </button>
+                        <button class="sound-pad pad-pink" data-sound="hype">
+                            <span class="pad-emoji">🚂</span>
+                            <span class="pad-title">Hype Train</span>
+                            <span class="pad-desc">Stream energy</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Slime Customizer Lab -->
+                <div class="customizer-card">
+                    <div class="card-inner-header">
+                        <h4><i class="fa-solid fa-flask-vial"></i> Slime Companion Lab</h4>
+                        <span class="note-pill" id="companion-status-text">Active</span>
+                    </div>
+
+                    <div class="customizer-controls">
+                        <!-- Slime Trail Color -->
+                        <div class="control-group">
+                            <label><i class="fa-solid fa-palette"></i> Slime Trail Neon Glow:</label>
+                            <div class="color-picker-row">
+                                <button class="color-swatch active" data-color="#39ff14" data-name="Toxic Lime" style="background:#39ff14;"></button>
+                                <button class="color-swatch" data-color="#bf55ec" data-name="Slug Purple" style="background:#bf55ec;"></button>
+                                <button class="color-swatch" data-color="#00f0ff" data-name="Cyber Cyan" style="background:#00f0ff;"></button>
+                                <button class="color-swatch" data-color="#ff3388" data-name="Neon Pink" style="background:#ff3388;"></button>
+                                <button class="color-swatch" data-color="#ffea00" data-name="Electric Gold" style="background:#ffea00;"></button>
+                            </div>
+                        </div>
+
+                        <!-- Slug Feeding Action -->
+                        <div class="control-group">
+                            <label><i class="fa-solid fa-bowl-food"></i> Feed Your Slug:</label>
+                            <div class="feed-action-row">
+                                <button class="feed-choice-btn" data-food="lettuce">🥬 Crunchy Lettuce</button>
+                                <button class="feed-choice-btn" data-food="slimeberry">🫐 Slime Berry</button>
+                                <button class="feed-choice-btn" data-food="mushroom">🍄 Magic Shroom</button>
+                            </div>
+                        </div>
+
+                        <!-- Slime Rank Stats -->
+                        <div class="slime-level-display">
+                            <div class="level-header">
+                                <span>Slug Army Rank: <strong id="rank-title" class="neon-text-green">Slug Cadet</strong></span>
+                                <span id="slime-xp-label">0 XP</span>
+                            </div>
+                            <div class="level-bar-bg">
+                                <div class="level-bar-fill" id="level-bar-fill" style="width: 10%;"></div>
+                            </div>
+                            <p class="level-hint">Move your mouse or touch the screen to generate slime and level up your Slug!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stream Schedule Section -->
+        <section id="schedule" class="schedule-section">
+            <div class="section-header">
+                <div class="section-tag"><i class="fa-regular fa-clock"></i> BROADCAST TIMETABLE</div>
+                <h2 class="section-title">THE WEEKLY <span class="neon-text-green">SLUG SCHEDULE</span></h2>
+                <p class="section-subtitle">Catch Mugzy live throughout the week on <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer">twitch.tv/mugzyslugs</a> (All times EST)</p>
+                <div class="accent-line"></div>
+            </div>
+
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <div class="day-badge">MONDAY &amp; WEDNESDAY</div>
+                    <div class="time-slot"><i class="fa-solid fa-moon"></i> 8:00 PM EST</div>
+                    <h3>Albion Online: Black Zone Warfare &amp; Flips</h3>
+                    <p>Guild roaming, market arbitrage, high-tier dungeon expeditions, and full-loot adrenaline.</p>
+                    <span class="slot-tag"><i class="fa-solid fa-shield"></i> Guild PvP &amp; Economy</span>
+                </div>
+
+                <div class="schedule-card highlight-card">
+                    <div class="day-badge twitch-badge">FRIDAY NIGHT SLIME</div>
+                    <div class="time-slot"><i class="fa-solid fa-fire"></i> 9:00 PM EST</div>
+                    <h3>Dead by Daylight &amp; Community Customs</h3>
+                    <p>Viewer custom lobbies, survivor 360 looping challenges, killer mindgames, and squad survival.</p>
+                    <span class="slot-tag twitch-tag"><i class="fa-brands fa-twitch"></i> Viewer Lobbies</span>
+                </div>
+
+                <div class="schedule-card">
+                    <div class="day-badge">SUNDAY CHILL</div>
+                    <div class="time-slot"><i class="fa-solid fa-headphones"></i> 7:00 PM EST</div>
+                    <h3>Dark Trap Beats &amp; Resale Q&amp;A</h3>
+                    <p>FL Studio beat production, eBay flips breakdown, veteran community chat, and late-night unwind.</p>
+                    <span class="slot-tag"><i class="fa-solid fa-leaf"></i> 420 Friendly Chill</span>
+                </div>
+            </div>
+
+            <!-- Massive Twitch CTA Banner -->
+            <div class="stream-invitation-box">
+                <div class="invitation-text">
+                    <h3>NEVER MISS A BROADCAST</h3>
+                    <p>Follow the channel and turn on notifications so you get alerted the second Mugzy goes live!</p>
+                </div>
+                <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-giant-twitch">
+                    <i class="fa-brands fa-twitch"></i>
+                    <span>FOLLOW TWITCH.TV/MUGZYSLUGS</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="brand-slug-icon"><i class="fa-solid fa-staff-snake"></i></div>
+                <div class="footer-brand-text">
+                    <span class="neon-text-green">Mugzy</span><span class="neon-text-purple">Slugs</span>
+                    <p>The official home of Kevin (MugzySlugs). Streamer, military veteran, e-commerce entrepreneur, and music producer.</p>
+                </div>
+            </div>
+
+            <div class="footer-links-group">
+                <h4>QUICK LINKS</h4>
+                <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch"></i> Twitch Channel</a>
+                <a href="https://www.youtube.com/@MugzySlugs" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> YouTube Channel</a>
+                <a href="#about"><i class="fa-solid fa-user"></i> About Kevin</a>
+                <a href="#ecommerce"><i class="fa-solid fa-cart-shopping"></i> E-Commerce &amp; Flips</a>
+                <a href="#music"><i class="fa-solid fa-music"></i> Music Hub</a>
+            </div>
+
+            <div class="footer-social-group">
+                <h4>CONNECT WITH MUGZY</h4>
+                <div class="social-icons-row">
+                    <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" title="Twitch: mugzyslugs" class="social-twitch"><i class="fa-brands fa-twitch"></i></a>
+                    <a href="https://www.youtube.com/@MugzySlugs" target="_blank" rel="noopener noreferrer" title="YouTube: @MugzySlugs" class="social-youtube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" title="Discord Community" class="social-discord"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" title="Twitter / X" class="social-twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+                <p class="vet-tribute"><i class="fa-solid fa-shield-halved"></i> Proudly Veteran Owned &amp; Operated</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <p>&copy; 2026 MugzySlugs. Built for the Slug Pit community. Follow at <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer">twitch.tv/mugzyslugs</a>.</p>
+            <p class="disclaimer">Fan &amp; Community Hub. Twitch is a trademark of Twitch Interactive, Inc.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Sticky Twitch Action Pill -->
+    <a href="https://www.twitch.tv/mugzyslugs" target="_blank" rel="noopener noreferrer" class="floating-twitch-pill" title="Jump to Twitch Channel">
+        <span class="live-dot-pulse"></span>
+        <i class="fa-brands fa-twitch"></i>
+        <span>twitch.tv/mugzyslugs</span>
+    </a>
+
+    <!-- Main Logic Script -->
+    <script src="script.js"></script>
+</body>
+</html>
