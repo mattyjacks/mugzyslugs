@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { xp: 50, name: 'Slug Cadet' },
         { xp: 200, name: 'Slime Specialist' },
         { xp: 500, name: 'Outland Raider' },
-        { xp: 1200, name: 'Slug Veteran' },
+        { xp: 1200, name: 'Slug Captain' },
         { xp: 2500, name: 'Slime Overlord' }
     ];
 
@@ -984,7 +984,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'SlimeSlinger', role: 'sub' },
         { name: 'AlbionCrafter99', role: 'viewer' },
         { name: 'FogLooper_x', role: 'vip' },
-        { name: 'VetBrother_Doc', role: 'mod' },
+        { name: 'Mod_Muggzy', role: 'mod' },
         { name: 'MugzySlugs', role: 'streamer' },
         { name: 'DarkTrapEnjoyer', role: 'sub' },
         { name: 'ToxicNea_Juke', role: 'viewer' },
@@ -996,7 +996,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Mugzy that flashlight blind was ridiculous haha",
         "NUMBIN is an absolute masterpiece on God",
         "Slug Army in full force tonight! 🐌💚",
-        "Thank you for your service Mugzy, real hero!",
+        "That shipping margin calculation was so clean!",
         "Yo that vintage stereo receiver flip was crazy profit!",
         "Dropshipping and marketplace margins dialed in 📦✨",
         "Is DBD viewer lobby next? I'm queuing up",

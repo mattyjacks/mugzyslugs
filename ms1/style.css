@@ -561,10 +561,10 @@ body {
     color: #99f7ff;
 }
 
-.vet-pill {
-    background: rgba(240, 180, 0, 0.15);
-    border: 1px solid #ffd000;
-    color: #ffe680;
+.flip-pill {
+    background: rgba(255, 170, 0, 0.15);
+    border: 1px solid #ffaa00;
+    color: #ffd280;
 }
 
 .420-pill {
@@ -1520,7 +1520,7 @@ section {
 }
 
 .ebay-card:hover { border-color: var(--neon-cyan); box-shadow: 0 15px 40px var(--neon-cyan-glow); }
-.vet-card:hover { border-color: #ffd000; box-shadow: 0 15px 40px rgba(255, 208, 0, 0.2); }
+.community-card:hover { border-color: #ffaa00; box-shadow: 0 15px 40px rgba(255, 170, 0, 0.25); }
 .stream-card:hover { border-color: var(--twitch-purple); box-shadow: 0 15px 40px var(--twitch-purple-glow); }
 .music-card:hover { border-color: var(--neon-green); box-shadow: 0 15px 40px var(--neon-green-glow); }
 
@@ -1536,7 +1536,7 @@ section {
 }
 
 .ebay-card .card-icon-bubble { background: rgba(0, 240, 255, 0.15); color: var(--neon-cyan); border: 1px solid var(--neon-cyan); }
-.vet-card .card-icon-bubble { background: rgba(255, 208, 0, 0.15); color: #ffd000; border: 1px solid #ffd000; }
+.community-card .card-icon-bubble { background: rgba(255, 170, 0, 0.15); color: #ffaa00; border: 1px solid #ffaa00; }
 .stream-card .card-icon-bubble { background: rgba(145, 70, 255, 0.15); color: #c48eff; border: 1px solid var(--twitch-purple); }
 .music-card .card-icon-bubble { background: rgba(57, 255, 20, 0.15); color: var(--neon-green); border: 1px solid var(--neon-green); }
 
@@ -2537,9 +2537,9 @@ section {
 .social-discord:hover { background: #5865f2; color: #fff; border-color: #5865f2; box-shadow: 0 0 15px rgba(88, 101, 242, 0.5); }
 .social-twitter:hover { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
 
-.vet-tribute {
+.community-tribute {
     font-size: 0.8rem;
-    color: #ffea00;
+    color: var(--neon-green);
     display: flex;
     align-items: center;
     gap: 0.5rem;
